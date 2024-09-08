@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <paddle.h>
+#include <brick.h>
 
 class Ball
 {
@@ -19,5 +20,6 @@ public:
 	int sHeight;
 	int sWidth;
 	void CollDetect(Paddle player);
+	void CollDetectBrick(Brick brick);
 };
 

@@ -7,6 +7,7 @@
 #include <ball.h>
 #include <paddle.h>
 #include <brick.h>
+#include <vector>
 
 using namespace std;
 
@@ -24,15 +25,28 @@ bool EventTriggered(double interval) {// to check if interval is less then 2 mse
 
 int main()
 {
+
+    int brickWidth = 50;
+    int brickHeight = 10;
+
     const int sWidth = 1200;
     const int sHeight = 800;
     InitWindow(sWidth, sHeight, "PONG");// size of window
     SetTargetFPS(60);// sets Game Target FPS
 
     // add font here - LoadFontEx
-    Ball ball = Ball(sWidth / 2, sHeight / 2, 15, white, 3, 3, sHeight, sWidth);
-    Paddle player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, red);
+    Ball ball = Ball(sWidth / 2, sHeight - 150, 15, white, 3, -7, sHeight, sWidth);
+    Paddle player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
     double interval = 0.2;
+
+    std::vector<Brick> bricks;
+    for (int i = 0; i < 100; i++) {
+        int posX = (i % 25) * (brickWidth + 5); // 25 bricks per row, adjust spacing
+        int posY = (i / 25) * (brickHeight + 5); // Move down every 25 bricks
+        bricks.emplace_back(posX, posY, brickWidth, brickHeight, 5);
+    }
+
+
 
     while (WindowShouldClose() == false)// will run until esc key is pressed
     {
@@ -41,7 +55,14 @@ int main()
 
         ball.Update();
         player.Update();
+
         ball.CollDetect(player);
+        for (Brick brick: bricks) {
+            ball.CollDetectBrick(brick);
+        }
+        for (Brick brick : bricks) {
+            brick.Draw();
+        }
         player.Draw();
         ball.Draw();
 
