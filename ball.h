@@ -1,5 +1,6 @@
 #pragma once
 #include <raylib.h>
+#include <paddle.h>
 
 class Ball
 {
@@ -17,5 +18,6 @@ public:
 	int speed_y;
 	int sHeight;
 	int sWidth;
+	void CollDetect(Paddle player);
 };
 

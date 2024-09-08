@@ -22,34 +22,6 @@ bool EventTriggered(double interval) {// to check if interval is less then 2 mse
     return false;
 }
 
-void CollisionDetect(Paddle player, Ball ball) {
-    for (int x = player.posX; x < player.posX + player.width; x++) {// check lower and upper bound of paddle
-        if (ball.PointInBall(x, player.posY)) {// check upper bound 
-            ball.posY = player.posY - (int)ball.radius;// move to edge
-            ball.speed_y = -ball.speed_y;
-            break;
-        }
-        if (ball.PointInBall(x, player.posY + player.height)) {// check lower bound 
-            ball.posY = player.posY + player.height + (int)ball.radius;// move to edge
-            ball.speed_y = -ball.speed_y;
-            break;
-        }
-    }
-    for (int y = player.posY; y < player.posY + player.height; y++) {// check left and right side of paddle
-        if (ball.PointInBall(player.posX, y)) {// check upper bound 
-            ball.posX = player.posX - (int)ball.radius;// move to edge
-            ball.speed_x = -ball.speed_x;
-            break;
-        }
-        if (ball.PointInBall(player.posX+ player.width, y)) {// check lower bound 
-            ball.posX = player.posX + player.width + (int)ball.radius;// move to edge
-            ball.speed_x = -ball.speed_x;
-            break;
-        }
-    }
-}
-
-
 int main()
 {
     const int sWidth = 1200;
@@ -69,35 +41,7 @@ int main()
 
         ball.Update();
         player.Update();
-        // collision check here - doesnt work as a standalone function , neet to check
-
-        for (int y = player.posY; y < player.posY + player.height; y++) {// check left and right side of paddle
-            if (ball.PointInBall(player.posX, y)) {// check left bound 
-                ball.posX = player.posX - (int)ball.radius;// move to edge
-                ball.speed_x = -ball.speed_x;
-                break;
-            }
-            if (ball.PointInBall(player.posX + player.width, y)) {// check right bound 
-                ball.posX = player.posX + player.width + (int)ball.radius;// move to edge
-                ball.speed_x = -ball.speed_x;
-                break;
-            }
-        }
-
-        for (int x = player.posX; x < player.posX + player.width; x++) {// check lower and upper bound of paddle
-            if (ball.PointInBall(x, player.posY)) {// check upper bound 
-                ball.posY = player.posY - (int)ball.radius;// move to edge
-                ball.speed_y = -ball.speed_y;
-                break;
-            }
-            if (ball.PointInBall(x, player.posY + player.height)) {// check lower bound 
-                ball.posY = player.posY + player.height + (int)ball.radius;// move to edge
-                ball.speed_y = -ball.speed_y;
-                break;
-            }
-        }
-
-
+        ball.CollDetect(player);
         player.Draw();
         ball.Draw();
 

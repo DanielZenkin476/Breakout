@@ -51,4 +51,34 @@ bool Ball::PointInBall(int x, int y)
 	return false;
 }
 
+void Ball::CollDetect(Paddle player)
+{
+	for (int y = player.posY; y < player.posY + player.height; y++) {// check left and right side of paddle
+		if (PointInBall(player.posX, y)) {// check left bound 
+			posX = posX - (int)radius;// move to edge
+			speed_x = -speed_x;
+			break;
+		}
+		if (PointInBall(player.posX + player.width, y)) {// check right bound 
+			posX = player.posX + player.width + (int)radius;// move to edge
+			speed_x = -speed_x;
+			break;
+		}
+	}
+
+	for (int x = player.posX; x < player.posX + player.width; x++) {// check lower and upper bound of paddle
+		if (PointInBall(x, player.posY)) {// check upper bound 
+			posY = player.posY - (int)radius;// move to edge
+			speed_y = -speed_y;
+			break;
+		}
+		if (PointInBall(x, player.posY + player.height)) {// check lower bound 
+			posY = player.posY + player.height + (int)radius;// move to edge
+			speed_y = -speed_y;
+			break;
+		}
+	}
+}
+
+
 
