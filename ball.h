@@ -20,6 +20,6 @@ public:
 	int sHeight;
 	int sWidth;
 	void CollDetect(Paddle player);
-	void CollDetectBrick(Brick brick);
+	bool CollDetectBrick(Brick brick);
 };
 

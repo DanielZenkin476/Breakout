@@ -38,12 +38,12 @@ int main()
     Ball ball = Ball(sWidth / 2, sHeight - 150, 15, white, 3, -7, sHeight, sWidth);
     Paddle player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
     double interval = 0.2;
-
+    // create bricks vector
     std::vector<Brick> bricks;
     for (int i = 0; i < 100; i++) {
         int posX = (i % 25) * (brickWidth + 5); // 25 bricks per row, adjust spacing
         int posY = (i / 25) * (brickHeight + 5); // Move down every 25 bricks
-        bricks.emplace_back(posX, posY, brickWidth, brickHeight, 5);
+        bricks.emplace_back(posX, posY, brickWidth, brickHeight, 4);
     }
 
 
@@ -52,16 +52,17 @@ int main()
     {
         BeginDrawing();//creates blank canvas so we can draw
         ClearBackground(BLACK);// change backround color, also to to a "soft reset" of screen to not show past iterations
-
+        // moves
         ball.Update();
         player.Update();
-
+        // coll detection with player
         ball.CollDetect(player);
-        for (Brick brick: bricks) {
-            ball.CollDetectBrick(brick);
-        }
-        for (Brick brick : bricks) {
-            brick.Draw();
+        // coll detection with brick
+        for (int i = 0; i < 100; i++) {
+            if (ball.CollDetectBrick(bricks[i])) {
+                bricks[i].Hit();
+            }
+            bricks[i].Draw();
         }
         player.Draw();
         ball.Draw();

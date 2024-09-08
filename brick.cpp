@@ -16,11 +16,11 @@ void Brick::Draw()
 	if (destroyed == false) {// if health is 0 - brick is destroyed
 		DrawRectangle(posX, posY, width, height, colors[health]);
 	}
+	else DrawRectangle(posX, posY, width, height, BLACK);
 }
 void Brick::Hit() {
 	if (destroyed == false) {
 		health = health - 1;
-		Draw();
 		if (health == 0) {
 			destroyed = true;
 		}

@@ -80,20 +80,21 @@ void Ball::CollDetect(Paddle player)
 	}
 }
 
-void Ball::CollDetectBrick(Brick brick)
+bool Ball::CollDetectBrick(Brick brick)
 {
+	bool hit = false;
 	if (brick.destroyed == false) {
 		for (int y = brick.posY; y < brick.posY + brick.height; y++) {// check left and right side of paddle
 			if (PointInBall(brick.posX, y)) {// check left bound 
 				posX = posX - (int)radius;// move to edge
 				speed_x = -speed_x;
-				brick.Hit();
+				hit = true;
 				break;
 			}
 			if (PointInBall(brick.posX + brick.width, y)) {// check right bound 
 				posX = brick.posX + brick.width + (int)radius;// move to edge
 				speed_x = -speed_x;
-				brick.Hit();
+				hit = true;
 				break;
 			}
 		}
@@ -102,17 +103,18 @@ void Ball::CollDetectBrick(Brick brick)
 			if (PointInBall(x, brick.posY)) {// check upper bound 
 				posY = brick.posY - (int)radius;// move to edge
 				speed_y = -speed_y;
-				brick.Hit();
+				hit = true;
 				break;
 			}
 			if (PointInBall(x, brick.posY + brick.height)) {// check lower bound 
 				posY = brick.posY + brick.height + (int)radius;// move to edge
 				speed_y = -speed_y;
-				brick.Hit();
+				hit = true;
 				break;
 			}
 		}
 	}
+	return hit;
 }
 
 

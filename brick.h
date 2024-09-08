@@ -11,8 +11,8 @@ public:
 	void Draw();
 	bool destroyed;
 	void Hit();
-	int health;
 private:
 	std::vector<Color> colors;
+	int health;
 };
 
