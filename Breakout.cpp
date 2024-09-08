@@ -58,8 +58,8 @@ int main()
     SetTargetFPS(60);// sets Game Target FPS
 
     // add font here - LoadFontEx
-    Ball ball = Ball(sWidth / 2, sHeight / 2, 15, white, 8, 8, sHeight, sWidth);
-    Paddle player = Paddle(sWidth / 2 - 50, sHeight - 50, 30, 100, sWidth, sHeight, red);
+    Ball ball = Ball(sWidth / 2, sHeight / 2, 15, white, 3, 3, sHeight, sWidth);
+    Paddle player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, red);
     double interval = 0.2;
 
     while (WindowShouldClose() == false)// will run until esc key is pressed
@@ -69,6 +69,21 @@ int main()
 
         ball.Update();
         player.Update();
+        // collision check here - doesnt work as a standalone function , neet to check
+
+        for (int y = player.posY; y < player.posY + player.height; y++) {// check left and right side of paddle
+            if (ball.PointInBall(player.posX, y)) {// check left bound 
+                ball.posX = player.posX - (int)ball.radius;// move to edge
+                ball.speed_x = -ball.speed_x;
+                break;
+            }
+            if (ball.PointInBall(player.posX + player.width, y)) {// check right bound 
+                ball.posX = player.posX + player.width + (int)ball.radius;// move to edge
+                ball.speed_x = -ball.speed_x;
+                break;
+            }
+        }
+
         for (int x = player.posX; x < player.posX + player.width; x++) {// check lower and upper bound of paddle
             if (ball.PointInBall(x, player.posY)) {// check upper bound 
                 ball.posY = player.posY - (int)ball.radius;// move to edge
@@ -78,18 +93,6 @@ int main()
             if (ball.PointInBall(x, player.posY + player.height)) {// check lower bound 
                 ball.posY = player.posY + player.height + (int)ball.radius;// move to edge
                 ball.speed_y = -ball.speed_y;
-                break;
-            }
-        }
-        for (int y = player.posY; y < player.posY + player.height; y++) {// check left and right side of paddle
-            if (ball.PointInBall(player.posX, y)) {// check upper bound 
-                ball.posX = player.posX - (int)ball.radius;// move to edge
-                ball.speed_x = -ball.speed_x;
-                break;
-            }
-            if (ball.PointInBall(player.posX + player.width, y)) {// check lower bound 
-                ball.posX = player.posX + player.width + (int)ball.radius;// move to edge
-                ball.speed_x = -ball.speed_x;
                 break;
             }
         }
