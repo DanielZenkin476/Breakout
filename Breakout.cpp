@@ -26,24 +26,31 @@ bool EventTriggered(double interval) {// to check if interval is less then 2 mse
 int main()
 {
 
-    int brickWidth = 50;
-    int brickHeight = 10;
+    int brickWidth = 45;
+    int brickHeight = 20;
 
-    const int sWidth = 1200;
+    const int sWidth = 1000;
     const int sHeight = 800;
-    InitWindow(sWidth, sHeight, "PONG");// size of window
+    InitWindow(sWidth, sHeight, "BreakDown");// size of window
     SetTargetFPS(60);// sets Game Target FPS
 
-    // add font here - LoadFontEx
-    Ball ball = Ball(sWidth / 2, sHeight - 150, 15, white, 3, -7, sHeight, sWidth);
+    // font 
+    Font font = LoadFontEx("Font/hpsimplifiedjpan-regular.ttf", 64, 0, 0);// font for display
+    //objects:
+
+    Ball ball = Ball(sWidth / 2, sHeight - 150, 15, white, 7, -7, sHeight, sWidth);
     Paddle player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
     double interval = 0.2;
     // create bricks vector
     std::vector<Brick> bricks;
-    for (int i = 0; i < 100; i++) {
-        int posX = (i % 25) * (brickWidth + 5); // 25 bricks per row, adjust spacing
-        int posY = (i / 25) * (brickHeight + 5); // Move down every 25 bricks
-        bricks.emplace_back(posX, posY, brickWidth, brickHeight, 4);
+    int numRows = 5;     // Example number of rows
+    int numCols = 20;    // Example number of bricks per row
+
+    for (int a = 0; a < numRows * numCols; a++) {
+        int posX = (a % numCols) * (brickWidth + 5); // Number of bricks per row
+        int posY = (a / numCols) * (brickHeight + 5); // Move down after each row
+        Brick br = Brick(posX, posY, brickWidth, brickHeight, 3);
+        bricks.emplace_back(br);
     }
 
 
@@ -52,18 +59,32 @@ int main()
     {
         BeginDrawing();//creates blank canvas so we can draw
         ClearBackground(BLACK);// change backround color, also to to a "soft reset" of screen to not show past iterations
-        // moves
+ 
+        // movement 
         ball.Update();
         player.Update();
+
         // coll detection with player
         ball.CollDetect(player);
+
         // coll detection with brick
         for (int i = 0; i < 100; i++) {
             if (ball.CollDetectBrick(bricks[i])) {
-                bricks[i].Hit();
+                player.score += bricks[i].Hit();
             }
-            bricks[i].Draw();
+            bricks[i].Draw();// draw the brick after collision check and score update
         }
+
+        // draw score:
+        DrawTextEx(font, "Score", { 50,700 }, 38, 2, WHITE);// draw Score
+        // drawing the score
+        char scoreText[10];
+        sprintf_s(scoreText, "%d", player.score);
+        Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2);
+        DrawTextEx(font, scoreText, { 100 + (170 - textSize.x) / 2,700 }, 38, 2, WHITE);//draw score centered
+
+
+        // draw player and ball 
         player.Draw();
         ball.Draw();
 

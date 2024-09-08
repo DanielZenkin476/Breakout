@@ -8,6 +8,7 @@ Paddle::Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c) {
 	sHeight = sH;
 	color = c;
 	speed = 10;
+	score = 0;
 }
 void Paddle::Draw() {
 	DrawRectangle(posX, posY, width, height, color);

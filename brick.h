@@ -10,9 +10,10 @@ public:
 	int posX, posY, width, height;
 	void Draw();
 	bool destroyed;
-	void Hit();
+	int Hit();
 private:
 	std::vector<Color> colors;
 	int health;
+	int destScore; // score to be added upon destruction
 };
 

@@ -9,6 +9,7 @@ Brick::Brick(int x, int y, int w, int h, int hp)
 	health = hp;
 	colors = GetCellcolors();// max 12 colors- 12 health per brick at max 
 	destroyed = false;
+	destScore = hp * 20;
 }
 
 void Brick::Draw()
@@ -18,12 +19,14 @@ void Brick::Draw()
 	}
 	else DrawRectangle(posX, posY, width, height, BLACK);
 }
-void Brick::Hit() {
+int Brick::Hit() {
 	if (destroyed == false) {
 		health = health - 1;
 		if (health == 0) {
 			destroyed = true;
+			return destScore;
 		}
 	}
+	return 0;
 }
 

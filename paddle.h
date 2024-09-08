@@ -14,5 +14,6 @@ public:
 	int sHeight;
 	int sWidth;
 	int speed;
+	int score;
 };
 
