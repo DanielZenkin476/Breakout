@@ -45,7 +45,9 @@ void Ball::Update() {
 
 bool Ball::PointInBall(int x, int y)
 {
-	if (abs(x - posX) ^ 2 + abs(y - posY) ^ 2 < radius ^ 2) return true;
+	if ((x - posX) * (x - posX) + (y - posY) * (y - posY) < radius * radius) {
+		return true;
+	}
 	return false;
 }
 
