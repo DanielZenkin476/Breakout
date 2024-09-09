@@ -16,16 +16,16 @@ Levels::Levels() {
     clears[0]  = false;
     
     bricks.clear();// to clear bricks for reuse
-    std::vector<Brick> bricks1;
+   
 
     for (int a = 0; a < numRows * numCols; a++) {
         int posX = (a % numCols) * (brickWidth + 5);
         int posY = (a / numCols) * (brickHeight + 5);
         Brick br = Brick(posX, posY, brickWidth, brickHeight, 4);
-        bricks1.emplace_back(br);
+        bricks.emplace_back(br);
     }
-    levels[0] = bricks1;
-    clears[0] = false;
+    levels[1] = bricks;
+    clears[1] = false;
 
     bricks.clear();// to clear bricks for reuse
 
