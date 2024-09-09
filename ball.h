@@ -6,6 +6,7 @@
 class Ball
 {
 public:
+	Ball();
 	Ball(int posx, int posy, float r, Color c, int sx, int sy, int sH, int sW);
 	void Draw();
 	void ChangeColor(Color c);

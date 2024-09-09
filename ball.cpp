@@ -1,6 +1,18 @@
 #include "ball.h"
 #include <math.h>
 
+
+Ball::Ball() {
+	posX = 0;
+	posY = 0;
+	radius = 0;
+	color = BLACK;
+	speed_x = 0;
+	speed_y = 0;
+	sHeight = 0;
+	sWidth = 0;
+}
+
 Ball::Ball(int posx, int posy, float r, Color c, int sx, int sy, int sH, int sW)
 {
 	posX = posx;

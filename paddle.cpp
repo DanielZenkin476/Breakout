@@ -1,4 +1,18 @@
 #include "paddle.h"
+
+Paddle::Paddle() {
+	posX = 0;
+	posY = 0;
+	height = 0;
+	width = 0;
+	sWidth = 0;
+	sHeight = 0;
+	color = BLACK;
+	speed = 0;
+	score = 0;
+}
+
+
 Paddle::Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c) {
 	posX = posx;
 	posY = posy;

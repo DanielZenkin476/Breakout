@@ -3,6 +3,7 @@
 class Paddle
 {
 public:
+	Paddle();
 	Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c);
 	void Draw();
 	void Update();
