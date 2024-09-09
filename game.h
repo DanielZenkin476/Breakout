@@ -1,6 +1,6 @@
 #pragma once
 #include <paddle.h>
-#include <brick.h>
+#include <levels.h>
 #include <ball.h>
 #include <raylib.h>
 
@@ -10,7 +10,7 @@ public:
 	Game(int sH, int sW, Font f);
 	Ball ball;
 	Paddle player;
-	std::vector<Brick> bricks;
+	Levels levels;
 	void Init();
 	void Update();
 	void CollDetect();
@@ -18,6 +18,7 @@ public:
 	int sHeight;
 	int sWidth;
 	Font font;
+	int level;
 private:
 	int score;
 };

@@ -1,23 +1,14 @@
 #include "game.h"
 
 Game::Game(int sH, int sW, Font f) {
-	sHeight = sH;
-	sWidth = sW;
+    sHeight = sH;
+    sWidth = sW;
     font = f;
-	ball = Ball(sWidth / 2, sHeight - 150, 15, WHITE, 7, -7, sHeight, sWidth);
-	player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
+    ball = Ball(sWidth / 2, sHeight - 150, 15, WHITE, 7, -7, sHeight, sWidth);
+    player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
     score = 0;
-    // first level 
-    int numRows = 5;     
-    int numCols = 20;    
-    int brickWidth = 45;
-    int brickHeight = 20;
-    for (int a = 0; a < numRows * numCols; a++) {
-        int posX = (a % numCols) * (brickWidth + 5); 
-        int posY = (a / numCols) * (brickHeight + 5); 
-        Brick br = Brick(posX, posY, brickWidth, brickHeight, 3);
-        bricks.emplace_back(br);
-    }
+    levels = Levels();
+    level = 2;
 }
 
 
@@ -37,10 +28,10 @@ void Game::CollDetect() {
 
     // coll detection with brick
     for (int i = 0; i < 100; i++) {
-        if (ball.CollDetectBrick(bricks[i])) {
-            score += bricks[i].Hit();
+        if (ball.CollDetectBrick(levels.levels[level][i])) {
+            score += levels.levels[level][i].Hit();
         }
-        bricks[i].Draw();// draw the brick after collision check and score update
+        levels.levels[level][i].Draw();// draw the brick after collision check and score update
     }
 }
 
