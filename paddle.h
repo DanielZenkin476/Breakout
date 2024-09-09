@@ -6,7 +6,8 @@ public:
 	Paddle();
 	Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c);
 	void Draw();
-	void Update();
+	void MoveLeft();
+	void MoveRight();
 	int posX;
 	int posY;
 	int height;

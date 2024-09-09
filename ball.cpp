@@ -34,7 +34,8 @@ void Ball::ChangeColor(Color c)
 {
 	color = c;
 }
-void Ball::Update() {
+bool Ball::Update() {
+	bool gameover = false;
 	posX += speed_x;
 	posY += speed_y;
 	if (posX >= sWidth - int(radius)) {// check right bound 
@@ -48,11 +49,13 @@ void Ball::Update() {
 	if (posY >= sHeight - int(radius)) {// check if lower bound
 		posY = sHeight - int(radius);// move to edge
 		speed_y = -speed_y;// -1 * to speed
+		return true;
 	}
 	if (posY <= 0) {// check if upper bound
 		posY = int(radius);// move to edge
 		speed_y = -speed_y;// -1 * to speed
 	}
+	return false;
 }
 
 bool Ball::PointInBall(int x, int y)

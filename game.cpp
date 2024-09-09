@@ -4,22 +4,26 @@ Game::Game(int sH, int sW, Font f) {
     sHeight = sH;
     sWidth = sW;
     font = f;
-    ball = Ball(sWidth / 2, sHeight - 150, 15, WHITE, 7, -7, sHeight, sWidth);
-    player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
-    score = 0;
-    levels = Levels();
-    level = 2;
+    Init();
 }
 
 
 void Game::Init()
 {
-
+    ball = Ball(sWidth / 2, sHeight - 150, 15, WHITE, 7, -7, sHeight, sWidth);
+    player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
+    score = 0;
+    levels = Levels();
+    level = 0;
+    gameover = false;
+    levelclear = false;
 }
 
 void Game::Update() {
-    ball.Update();
-    player.Update();
+
+    gameover = ball.Update();
+    HandleInput();// handle input to move player
+
 }
 
 void Game::CollDetect() {
@@ -32,6 +36,27 @@ void Game::CollDetect() {
             score += levels.levels[level][i].Hit();
         }
         levels.levels[level][i].Draw();// draw the brick after collision check and score update
+    }
+}
+
+
+
+void Game::CheckLevelclear() {
+    //check all bricks are 0 hp
+}
+
+
+
+void Game::HandleInput() {
+    int keyPressed = GetKeyPressed();
+    if (gameover) {// checks for game over
+        Init();
+    }
+    if (IsKeyDown(KEY_LEFT)) {
+        player.MoveLeft();
+    }
+    if (IsKeyDown(KEY_RIGHT)) {
+        player.MoveRight();
     }
 }
 

@@ -14,11 +14,15 @@ public:
 	void Init();
 	void Update();
 	void CollDetect();
+	void CheckLevelclear();
 	void Draw();
+	void HandleInput();
 	int sHeight;
 	int sWidth;
 	Font font;
 	int level;
+	bool levelclear;
+	bool gameover;
 private:
 	int score;
 };

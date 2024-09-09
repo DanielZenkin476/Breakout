@@ -10,7 +10,7 @@ public:
 	Ball(int posx, int posy, float r, Color c, int sx, int sy, int sH, int sW);
 	void Draw();
 	void ChangeColor(Color c);
-	void Update();
+	bool Update();
 	bool PointInBall(int x, int y);
 	int posX;
 	int posY;

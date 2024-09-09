@@ -27,20 +27,21 @@ Paddle::Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c) {
 void Paddle::Draw() {
 	DrawRectangle(posX, posY, width, height, color);
 }
-void Paddle::Update() {
 
-	if (IsKeyDown(KEY_LEFT)) {
-		if (posX <= 0) {
-			posX = 0;
-		}
-		else posX = posX - speed;
+void Paddle::MoveLeft()
+{
+	if (posX <= 0) {
+		posX = 0;
 	}
-	if (IsKeyDown(KEY_RIGHT)) {
-		if (posX >= sWidth - width) {
-			posX = sWidth - width;
-		}
-		else posX = posX + speed;
+	else posX = posX - speed;
+}
+
+void Paddle::MoveRight()
+{
+	if (posX >= sWidth - width) {
+		posX = sWidth - width;
 	}
+	else posX = posX + speed;
 }
 	
 	
