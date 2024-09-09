@@ -7,19 +7,6 @@
 
 using namespace std;
 
-double lastUpdateTime = 0.0;// to manage block movment downwards
-
-bool EventTriggered(double interval) {// to check if interval is less then 2 msec- then new hit
-    // function to check if time between current time and last check time is more then interval- if yes return true
-    double currTime = GetTime();
-    if (interval <= currTime - lastUpdateTime) {
-        lastUpdateTime = currTime;
-        return true;
-    }
-    return false;
-}
-
-
 int main()
 {
 

@@ -6,8 +6,9 @@ class Levels
 {
 public:
 	Levels();
-	std::vector<std::vector<Brick>> levels;// a vector of vectors of bricks - each vectors of bricks is a level.
-	std::vector<bool> clears;
+	std::vector<Brick> levels[3];// a vector of vectors of bricks - each vectors of bricks is a level.
+	bool clears[3];
 	bool CheckLevel(int i);
+	std::vector<Brick> GetLevels(int level);
 };
 

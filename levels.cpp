@@ -12,30 +12,31 @@ Levels::Levels() {
         Brick br = Brick(posX, posY, brickWidth, brickHeight, 3);
         bricks.emplace_back(br);
     }
-    levels.emplace_back(bricks);
-    clears.emplace_back(false);
-
+    levels[0]  =bricks;
+    clears[0]  = false;
+    
     bricks.clear();// to clear bricks for reuse
+    std::vector<Brick> bricks1;
 
     for (int a = 0; a < numRows * numCols; a++) {
         int posX = (a % numCols) * (brickWidth + 5);
         int posY = (a / numCols) * (brickHeight + 5);
         Brick br = Brick(posX, posY, brickWidth, brickHeight, 4);
-        bricks.emplace_back(br);
+        bricks1.emplace_back(br);
     }
-    levels.emplace_back(bricks);
-    clears.emplace_back(false);
+    levels[0] = bricks1;
+    clears[0] = false;
 
     bricks.clear();// to clear bricks for reuse
-    
+
     for (int a = 0; a < numRows * numCols; a++) {
         int posX = (a % numCols) * (brickWidth + 5);
         int posY = (a / numCols) * (brickHeight + 5);
         Brick br = Brick(posX, posY, brickWidth, brickHeight, 5);
         bricks.emplace_back(br);
     }
-    levels.emplace_back(bricks);
-    clears.emplace_back(false);
+    levels[2] = bricks;
+    clears[2] = false;
 }
 
 bool Levels::CheckLevel(int i)
@@ -44,4 +45,9 @@ bool Levels::CheckLevel(int i)
         if (!item.destroyed) return false;
     }
     return true;
+}
+
+std::vector<Brick> Levels::GetLevels(int level)
+{
+    return levels[level];
 }

@@ -1,4 +1,20 @@
 #include "game.h"
+// for move between levels- to make a single press possible 
+double lastUpdateTime = 0.0;// to manage block movment downwards
+
+bool EventTriggered(double interval) {// to check if interval is less then 2 msec- then new hit
+    // function to check if time between current time and last check time is more then interval- if yes return true
+    double currTime = GetTime();
+    if (interval <= currTime - lastUpdateTime) {
+        lastUpdateTime = currTime;
+        return true;
+    }
+    return false;
+}
+
+
+
+//------------
 
 Game::Game(int sH, int sW, Font f) {
     sHeight = sH;
@@ -6,6 +22,7 @@ Game::Game(int sH, int sW, Font f) {
     font = f;
     level = 0;
     levels = Levels();
+    score = 0;
     Init();
 }
 
@@ -14,8 +31,8 @@ void Game::Init()
 {
     ball = Ball(sWidth / 2, sHeight - 150, 15, WHITE, 7, -7, sHeight, sWidth);
     player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
-    score = 0;
     gameover = false;
+    currLevel = levels.GetLevels(level);
 }
 
 void Game::Update() {
@@ -30,11 +47,11 @@ void Game::CollDetect() {
     ball.CollDetect(player);
 
     // coll detection with brick
-    for (int i = 0; i < 100; i++) {
-        if (ball.CollDetectBrick(levels.levels[level][i])) {
-            score += levels.levels[level][i].Hit();
+    for (int i = 0; i < currLevel.size(); i++) {
+        if (ball.CollDetectBrick(currLevel[i])) {
+            score += currLevel[i].Hit();
         }
-        levels.levels[level][i].Draw();// draw the brick after collision check and score update
+        currLevel[i].Draw();// draw the brick after collision check and score update- can do here because las func before draw - not the best place but more efficent then an extra loop
     }
 }
 
@@ -52,8 +69,7 @@ void Game::CheckLevelclear() {
 
 
 void Game::HandleInput() {
-    int keyPressed = GetKeyPressed();
-    if (gameover) {// checks for game over
+    if (gameover && IsKeyDown) {// checks for game over
         levels = Levels();// rset levels
         Init();
     }
@@ -62,6 +78,13 @@ void Game::HandleInput() {
     }
     if (IsKeyDown(KEY_RIGHT)) {
         player.MoveRight();
+    }
+    if (IsKeyDown(KEY_UP)) {
+        if (EventTriggered(1.0)) {
+            level = (level+1)%3;
+            Init();
+        }
+        
     }
 }
 

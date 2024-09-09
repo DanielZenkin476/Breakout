@@ -22,6 +22,7 @@ public:
 	Font font;
 	int level;
 	bool gameover;
+	std::vector<Brick> currLevel;
 private:
 	int score;
 };
