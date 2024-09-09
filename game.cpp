@@ -4,6 +4,8 @@ Game::Game(int sH, int sW, Font f) {
     sHeight = sH;
     sWidth = sW;
     font = f;
+    level = 0;
+    levels = Levels();
     Init();
 }
 
@@ -13,10 +15,7 @@ void Game::Init()
     ball = Ball(sWidth / 2, sHeight - 150, 15, WHITE, 7, -7, sHeight, sWidth);
     player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
     score = 0;
-    levels = Levels();
-    level = 0;
     gameover = false;
-    levelclear = false;
 }
 
 void Game::Update() {
@@ -43,6 +42,11 @@ void Game::CollDetect() {
 
 void Game::CheckLevelclear() {
     //check all bricks are 0 hp
+    bool clear = levels.CheckLevel(level);
+    if (clear) {// level is clear
+        level++;
+        Init();// restart with new level
+    }
 }
 
 
@@ -50,6 +54,7 @@ void Game::CheckLevelclear() {
 void Game::HandleInput() {
     int keyPressed = GetKeyPressed();
     if (gameover) {// checks for game over
+        levels = Levels();// rset levels
         Init();
     }
     if (IsKeyDown(KEY_LEFT)) {

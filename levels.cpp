@@ -13,7 +13,8 @@ Levels::Levels() {
         bricks.emplace_back(br);
     }
     levels.emplace_back(bricks);
-    
+    clears.emplace_back(false);
+
     bricks.clear();// to clear bricks for reuse
 
     for (int a = 0; a < numRows * numCols; a++) {
@@ -23,9 +24,10 @@ Levels::Levels() {
         bricks.emplace_back(br);
     }
     levels.emplace_back(bricks);
+    clears.emplace_back(false);
 
     bricks.clear();// to clear bricks for reuse
-
+    
     for (int a = 0; a < numRows * numCols; a++) {
         int posX = (a % numCols) * (brickWidth + 5);
         int posY = (a / numCols) * (brickHeight + 5);
@@ -33,4 +35,13 @@ Levels::Levels() {
         bricks.emplace_back(br);
     }
     levels.emplace_back(bricks);
+    clears.emplace_back(false);
+}
+
+bool Levels::CheckLevel(int i)
+{
+    for (Brick item : levels[i]) {
+        if (!item.destroyed) return false;
+    }
+    return true;
 }

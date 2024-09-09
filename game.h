@@ -21,7 +21,6 @@ public:
 	int sWidth;
 	Font font;
 	int level;
-	bool levelclear;
 	bool gameover;
 private:
 	int score;
