@@ -10,5 +10,6 @@ public:
 	bool clears[3];
 	bool CheckLevel(int i);
 	std::vector<Brick> GetLevels(int level);
+	std::vector<Brick> BuildSquare(int numRows, int numCols, int startx, int starty, int brickWidth, int brickHeight, int hp);
 };
 

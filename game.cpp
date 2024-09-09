@@ -71,6 +71,7 @@ void Game::CheckLevelclear() {
 void Game::HandleInput() {
     if (gameover && IsKeyDown) {// checks for game over
         levels = Levels();// rset levels
+        level = 0; // go back to level 0 - can change
         Init();
     }
     if (IsKeyDown(KEY_LEFT)) {
