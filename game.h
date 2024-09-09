@@ -18,5 +18,7 @@ public:
 	int sHeight;
 	int sWidth;
 	Font font;
+private:
+	int score;
 };
 
