@@ -1,20 +1,18 @@
 // Breackout.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// this is a project made in C++ using microsoft visual studio 
 
 #include <iostream>
 #include <raylib.h>
-#include <game.h> 
+#include <game.h> // main game class
 
-using namespace std;
+using namespace std;//for easy output
 
 int main()
 {
-
-    int brickWidth = 45;
-    int brickHeight = 20;
-
+    // screed res
     const int sWidth = 1000;
     const int sHeight = 800;
+    // init window
     InitWindow(sWidth, sHeight, "BreakDown");// size of window
     SetTargetFPS(60);// sets Game Target FPS
 
@@ -25,15 +23,17 @@ int main()
     Game game = Game(sHeight, sWidth, font);
 
 
-    while (WindowShouldClose() == false)// will run until esc key is pressed
+    while (WindowShouldClose() == false)// will run until esc key is pressed, game loop
     {
         BeginDrawing();//creates blank canvas so we can draw
         ClearBackground(BLACK);// change backround color, also to to a "soft reset" of screen to not show past iterations
+
+        game.CheckLevelclear();// to check if level is cleared before starting game loop
  
         // movement 
         game.Update();
 
-        // coll detection with player
+        // coll detection ball with player and bricks 
         game.CollDetect();
 
         // draw score:
