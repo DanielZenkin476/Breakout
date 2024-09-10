@@ -1,6 +1,6 @@
 #include "paddle.h"
 
-Paddle::Paddle() {
+Paddle::Paddle() {//defualt cctor - blac
 	posX = 0;
 	posY = 0;
 	height = 0;
@@ -13,7 +13,7 @@ Paddle::Paddle() {
 }
 
 
-Paddle::Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c) {
+Paddle::Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c) {// ctor by parametars
 	posX = posx;
 	posY = posy;
 	height = h;
@@ -24,11 +24,11 @@ Paddle::Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c) {
 	speed = 10;
 	
 }
-void Paddle::Draw() {
+void Paddle::Draw() {// draws paddle onscreen
 	DrawRectangle(posX, posY, width, height, color);
 }
 
-void Paddle::MoveLeft()
+void Paddle::MoveLeft()// move paddle to left if possible
 {
 	if (posX <= 0) {
 		posX = 0;
@@ -36,7 +36,7 @@ void Paddle::MoveLeft()
 	else posX = posX - speed;
 }
 
-void Paddle::MoveRight()
+void Paddle::MoveRight()// move paddle to right if possible
 {
 	if (posX >= sWidth - width) {
 		posX = sWidth - width;

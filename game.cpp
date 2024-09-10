@@ -70,7 +70,7 @@ void Game::CheckLevelclear() {// function checks if curr level is cleared ( usin
 
 
 void Game::HandleInput() {// function to hanle player input and to check for game over 
-    if (gameover && IsKeyDown) {// checks for game over
+    if (gameover) {// checks for game over
         levels = Levels();// reset levels
         level = 0; // go back to level 0 - can change
         score = 0;

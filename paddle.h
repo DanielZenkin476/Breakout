@@ -3,18 +3,18 @@
 class Paddle
 {
 public:
-	Paddle();
-	Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c);
-	void Draw();
-	void MoveLeft();
-	void MoveRight();
-	int posX;
-	int posY;
-	int height;
-	int width;
-	Color color;
-	int sHeight;
-	int sWidth;
-	int speed;
+	Paddle();//Defualt Ctor
+	Paddle(int posx, int posy, int h, int w, int sW, int sH, Color c);//Ctor by paramaters
+	void Draw();// draw padle
+	void MoveLeft();// move paddle left
+	void MoveRight();// move paddle right
+	int posX;// pos x of paddle
+	int posY;// pos y of paddle
+	int height;// height of paddle
+	int width;// width of paddle
+	Color color;// color of paddle
+	int sHeight;//screen height
+	int sWidth;//screen width
+	int speed;// speed of paddle 
 };
 
