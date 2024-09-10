@@ -16,5 +16,6 @@ public:
 	int sHeight;//screen height
 	int sWidth;//screen width
 	int speed;// speed of paddle 
+	void Doublewidth();
 };
 

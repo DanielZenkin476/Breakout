@@ -29,6 +29,8 @@ int main()
         ClearBackground(BLACK);// change backround color, also to to a "soft reset" of screen to not show past iterations
 
         game.CheckLevelclear();// to check if level is cleared before starting game loop
+
+        game.PowerUpdateDraw();
  
         // movement 
         game.Update();
@@ -38,6 +40,7 @@ int main()
 
         // draw score:
         game.Draw();
+
 
         EndDrawing();// end canvas drawing
 

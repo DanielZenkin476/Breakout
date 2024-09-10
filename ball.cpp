@@ -6,9 +6,9 @@ Ball::Ball() {//Ctor - 0 to all values, ball is black ( invisible)
 	posX = 0;
 	posY = 0;
 	radius = 0;
-	color = BLACK;
+	color = WHITE;
 	speed_x = 0;
-	speed_y = 0;
+	speed_y = 5;
 	sHeight = 0;
 	sWidth = 0;
 }

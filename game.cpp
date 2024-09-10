@@ -38,11 +38,6 @@ void Game::Init()// function that creates a new ball player and current level (u
 
 void Game::Update() {// Updates game objects - used every frame , updates position of paddle and ball
     gameover = ball.Update();
-    int count = 0;
-    for (Powerup power : powerups) {
-        if (power.UpdatePower())
-            powerups.erase(powerups.begin()+count);
-    }
     HandleInput();// handle input to move player
 }
 
@@ -60,7 +55,7 @@ void Game::CollDetect() {
                 // create and add new powerup 
                 int x = currLevel[i].posX + currLevel[i].width / 2;
                 int y = currLevel[i].posY + currLevel[i].height / 2;
-                Powerup power = Powerup(x, y, 5, sHeight, sWidth, 1);
+                Powerup power = Powerup(x, y, 10, sHeight, sWidth, 1 );
                 powerups.emplace_back(power); 
             }
         }
@@ -104,6 +99,24 @@ void Game::HandleInput() {// function to hanle player input and to check for gam
     }
 }
 
+void Game::PowerUpdateDraw()
+{
+    for (int i = 0; i < powerups.size(); i++) {
+        bool out = powerups[i].Update();
+        bool col = powerups[i].CollDetect(player);
+        if (col == true) {
+            //first effect - paddle is doubled
+            player.Doublewidth();
+            out = true;
+        }
+        if (out == true) {
+            powerups.erase(powerups.begin() + i);
+            i--;
+        }
+        else powerups[i].Draw();
+    }
+}
+
 
 void Game::Draw() {// function draws the score, ball and player paddle - bricks drawn when collision is checked to save a loop runtime
 
@@ -117,9 +130,6 @@ void Game::Draw() {// function draws the score, ball and player paddle - bricks 
     // draw ball and player
     player.Draw();
     ball.Draw();
-    for (Powerup power : powerups) {
-        power.Draw();
-    }
 }
 
 

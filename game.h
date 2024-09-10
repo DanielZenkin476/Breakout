@@ -27,6 +27,7 @@ public:
 	bool gameover;// false if not game over- true if game over (resets)
 	std::vector<Brick> currLevel;// vector of bricks- current level in play
 	std::vector <Powerup> powerups;// vector of powerups, starts empty
+	void PowerUpdateDraw();
 private:
 	int score;// score
 };

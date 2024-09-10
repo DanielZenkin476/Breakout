@@ -8,7 +8,7 @@ Powerup::Powerup(int posx, int posy, float r, int sH, int sW, int i ) {
 	radius = r;
 	color = GetCellcolors()[i];
 	speed_x = 0;
-	speed_y = 5;
+	speed_y = 10;
 	sHeight = sH;
 	sWidth = sW;
 	index = i;

@@ -43,5 +43,10 @@ void Paddle::MoveRight()// move paddle to right if possible
 	}
 	else posX = posX + speed;
 }
+
+void Paddle::Doublewidth()
+{
+	width += width;
+}
 	
 	
