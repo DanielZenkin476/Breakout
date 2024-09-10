@@ -28,6 +28,7 @@ public:
 	std::vector<Brick> currLevel;// vector of bricks- current level in play
 	std::vector <Powerup> powerups;// vector of powerups, starts empty
 	void PowerUpdateDraw();
+	void ActivatePower(int index);
 private:
 	int score;// score
 };

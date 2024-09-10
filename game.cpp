@@ -105,8 +105,7 @@ void Game::PowerUpdateDraw()
         bool out = powerups[i].Update();
         bool col = powerups[i].CollDetect(player);
         if (col == true) {
-            //first effect - paddle is doubled
-            player.Doublewidth();
+            ActivatePower(powerups[i].index);
             out = true;
         }
         if (out == true) {
@@ -117,9 +116,18 @@ void Game::PowerUpdateDraw()
     }
 }
 
+void Game::ActivatePower(int index)
+{
+    if (index == 1) {
+        player.Doublewidth();
+    }
+
+}
+
+
+
 
 void Game::Draw() {// function draws the score, ball and player paddle - bricks drawn when collision is checked to save a loop runtime
-
     // draw score:
     DrawTextEx(font, "Score", { 50,700 }, 38, 2, WHITE);// draw Score
     // drawing the score itself
