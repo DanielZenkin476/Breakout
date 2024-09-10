@@ -33,23 +33,36 @@ void Game::Init()// function that creates a new ball player and current level (u
     player = Paddle(sWidth / 2 - 50, sHeight - 60, 30, 100, sWidth, sHeight, WHITE);
     gameover = false;
     currLevel = levels.GetLevels(level);
+    powerups.clear();
 }
 
 void Game::Update() {// Updates game objects - used every frame , updates position of paddle and ball
-
     gameover = ball.Update();
+    int count = 0;
+    for (Powerup power : powerups) {
+        if (power.UpdatePower())
+            powerups.erase(powerups.begin()+count);
+    }
     HandleInput();// handle input to move player
-
 }
 
 void Game::CollDetect() {
     // coll detection ball with player
     ball.CollDetect(player);
-
+    int addscore = 0;
     // coll detection with brick, for loop on every brick
     for (int i = 0; i < currLevel.size(); i++) {
         if (ball.CollDetectBrick(currLevel[i])) {// if hit, add scroe
-            score += currLevel[i].Hit();// call upon hit function, returns score
+            addscore = currLevel[i].Hit();
+            score += addscore;// call upon hit function, returns score if destroyde
+            if (addscore != 0) {
+                // brick was destroyed 
+                // create and add new powerup 
+                int x = currLevel[i].posX + currLevel[i].width / 2;
+                int y = currLevel[i].posY + currLevel[i].height / 2;
+                Powerup power = Powerup(x, y, 5, sHeight, sWidth, 1);
+                powerups.emplace_back(power); 
+            }
         }
         currLevel[i].Draw();// draw the brick after collision check and score update- can do here because las func before draw - not the best place but more efficent then an extra loop
     }
@@ -104,6 +117,10 @@ void Game::Draw() {// function draws the score, ball and player paddle - bricks 
     // draw ball and player
     player.Draw();
     ball.Draw();
+    for (Powerup power : powerups) {
+        power.Draw();
+    }
 }
+
 
 

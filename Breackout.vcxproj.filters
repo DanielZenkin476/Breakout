@@ -36,6 +36,9 @@
     <ClCompile Include="levels.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="powerup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="levels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="powerup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

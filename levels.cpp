@@ -2,7 +2,7 @@
 Levels::Levels() {
     // first level 
 
-    std::vector<Brick> bricks = BuildSquare(5,20,0,0,45,20,3);
+    std::vector<Brick> bricks = BuildSquare(5,20,0,0,45,20,1);
     levels[0] = bricks;
     
     bricks.clear();// to clear bricks for reuse

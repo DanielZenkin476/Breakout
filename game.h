@@ -3,6 +3,9 @@
 #include <levels.h>// levels class 
 #include <ball.h>// ball class
 #include <raylib.h>
+#include <powerup.h>
+#include <iostream>
+using namespace std;
 
 class Game
 {
@@ -23,6 +26,7 @@ public:
 	int level;// saves current level (0-2)
 	bool gameover;// false if not game over- true if game over (resets)
 	std::vector<Brick> currLevel;// vector of bricks- current level in play
+	std::vector <Powerup> powerups;// vector of powerups, starts empty
 private:
 	int score;// score
 };

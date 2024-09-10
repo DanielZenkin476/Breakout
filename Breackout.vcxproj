@@ -136,6 +136,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="levels.cpp" />
     <ClCompile Include="paddle.cpp" />
+    <ClCompile Include="powerup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="levels.h" />
     <ClInclude Include="paddle.h" />
+    <ClInclude Include="powerup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
